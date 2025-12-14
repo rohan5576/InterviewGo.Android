@@ -77,10 +77,6 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
         
         .section-title {
             font-size: 24px;
@@ -171,7 +167,6 @@
             <button class="tab-btn active" onclick="showTab('privacy')">🔒 Privacy</button>
             <button class="tab-btn" onclick="showTab('terms')">📜 Terms</button>
             <button class="tab-btn" onclick="showTab('contact')">📧 Contact</button>
-            <button class="tab-btn" onclick="showTab('verified')">✅ Email Verified</button>
         </nav>
     </header>
 
@@ -367,45 +362,6 @@
             </div>
         </div>
 
-        <!-- EMAIL VERIFIED TAB -->
-        <div id="verified" class="tab-content">
-            <div style="text-align: center; padding: 40px 0;">
-                <div style="font-size: 80px; margin-bottom: 24px; animation: bounce 1s ease-in-out;">✅</div>
-                <h1 class="section-title" style="border: none; justify-content: center;">Email Verified!</h1>
-                
-                <div class="contact-box" style="margin-top: 32px;">
-                    <p style="font-size: 18px; color: #E2E8F0; margin-bottom: 24px;">
-                        Your email has been verified successfully.<br>
-                        You can now sign in to InterviewGo.
-                    </p>
-                    
-                    <div style="text-align: left; background: rgba(15, 23, 42, 0.5); border-radius: 12px; padding: 20px; margin: 24px 0;">
-                        <h3 style="color: #06B6D4; margin-bottom: 16px;">Next Steps:</h3>
-                        <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px;">
-                            <span style="width: 28px; height: 28px; background: linear-gradient(135deg, #06B6D4, #8B5CF6); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #0F172A; flex-shrink: 0;">1</span>
-                            <span style="color: #E2E8F0;">Open the <strong>InterviewGo</strong> app on your Android device</span>
-                        </div>
-                        <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px;">
-                            <span style="width: 28px; height: 28px; background: linear-gradient(135deg, #06B6D4, #8B5CF6); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #0F172A; flex-shrink: 0;">2</span>
-                            <span style="color: #E2E8F0;">Tap <strong>"Sign In"</strong></span>
-                        </div>
-                        <div style="display: flex; align-items: flex-start; gap: 12px;">
-                            <span style="width: 28px; height: 28px; background: linear-gradient(135deg, #06B6D4, #8B5CF6); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #0F172A; flex-shrink: 0;">3</span>
-                            <span style="color: #E2E8F0;">Enter your email and password to continue</span>
-                        </div>
-                    </div>
-                    
-                    <a href="https://play.google.com/store/apps/details?id=in.interviewgo.android" 
-                       style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #06B6D4, #0891B2); color: #0F172A; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; margin-top: 16px;">
-                        📱 Download App
-                    </a>
-                </div>
-                
-                <p style="color: #64748B; font-size: 14px; margin-top: 24px;">
-                    Don't have the app yet? <a href="https://play.google.com/store/apps/details?id=in.interviewgo.android">Get it on Google Play</a>
-                </p>
-            </div>
-        </div>
     </div>
 
     <footer class="footer">
