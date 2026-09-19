@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InterviewGo</title>
+<meta name="theme-color" content="#0F172A">
+<meta property="og:title" content="InterviewGo">
+<meta property="og:description" content="Ace your Android & product interviews. Read real interview experiences, practice questions, and discover jobs.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://rohan5576.github.io/InterviewGo.Android/assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="InterviewGo">
+<meta name="twitter:description" content="Ace your Android & product interviews.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0F172A;
+    color: #CBD5E1;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  a { color: #06B6D4; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .header {
+    background: linear-gradient(135deg, rgba(6,182,212,0.14), rgba(139,92,246,0.14));
+    border-bottom: 1px solid rgba(148,163,184,0.1);
+    padding: 26px 20px 14px;
+    text-align: center;
+  }
+  .logo-mark {
+    width: 52px; height: 52px; margin: 0 auto 10px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #06B6D4, #8B5CF6);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+  }
+  .brand { font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #06B6D4, #8B5CF6);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .tagline { color: #94A3B8; font-size: 13px; margin-top: 2px; }
+
+  .wrap { flex: 1; width: 100%; max-width: 640px; margin: 0 auto; padding: 28px 18px 40px; }
+
+  .pill { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; color: #67E8F9; background: rgba(6,182,212,0.12);
+    border: 1px solid rgba(6,182,212,0.28); border-radius: 999px; padding: 4px 12px; margin-bottom: 14px; }
+
+  .card { background: rgba(30,41,59,0.6); border: 1px solid rgba(148,163,184,0.14);
+    border-radius: 16px; padding: 24px; }
+  .title { font-size: 22px; font-weight: 700; color: #F1F5F9; line-height: 1.3; }
+  .subtitle { font-size: 15px; font-weight: 600; color: #E2E8F0; margin-top: 4px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .chip { font-size: 12px; font-weight: 500; color: #CBD5E1;
+    background: rgba(148,163,184,0.12); border: 1px solid rgba(148,163,184,0.16);
+    padding: 4px 10px; border-radius: 8px; }
+  .desc { color: #94A3B8; font-size: 14px; margin-top: 14px; white-space: pre-wrap; }
+  .fade { color: #64748B; font-size: 13px; margin-top: 10px; }
+
+  .ctas { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
+  .btn { display: block; text-align: center; padding: 13px 18px; border-radius: 12px;
+    font-size: 15px; font-weight: 600; transition: opacity .15s; }
+  .btn:hover { opacity: .88; text-decoration: none; }
+  .btn-primary { background: linear-gradient(135deg, #06B6D4, #8B5CF6); color: #fff; }
+  .btn-secondary { background: rgba(148,163,184,0.12); color: #E2E8F0;
+    border: 1px solid rgba(148,163,184,0.22); }
+
+  .hero { text-align: center; padding: 20px 4px 8px; }
+  .hero h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #06B6D4, #8B5CF6);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { color: #94A3B8; font-size: 14px; margin-top: 8px; }
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; margin-top: 22px; }
+  .feat { background: rgba(30,41,59,0.5); border: 1px solid rgba(148,163,184,0.12);
+    border-radius: 14px; padding: 14px 12px; text-align: center; }
+  .feat .ic { font-size: 20px; }
+  .feat .lb { font-size: 13px; font-weight: 600; color: #F1F5F9; margin-top: 6px; }
+  .feat .ds { font-size: 12px; color: #94A3B8; margin-top: 2px; }
+
+  .empty { text-align: center; padding: 30px 8px; }
+  .empty .big { font-size: 15px; font-weight: 600; color: #F1F5F9; }
+  .empty .sm { color: #94A3B8; font-size: 13px; margin-top: 6px; }
+
+  .spinner { width: 30px; height: 30px; margin: 60px auto; border: 3px solid rgba(148,163,184,0.2);
+    border-top-color: #06B6D4; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .footer { text-align: center; padding: 26px 18px; border-top: 1px solid rgba(148,163,184,0.1);
+    color: #64748B; font-size: 12px; }
+  .footer .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo-mark">🚀</div>
+  <div class="brand">InterviewGo</div>
+  <div class="tagline">Ace your Android &amp; product interviews</div>
+</header>
+
+<main class="wrap" id="app">
+  <div class="spinner"></div>
+</main>
+
+<footer class="footer">
+  <div class="links">
+    <a href="https://rohan5576.github.io/InterviewGo.Android/#privacy">Privacy</a>
+    <a href="https://rohan5576.github.io/InterviewGo.Android/#terms">Terms</a>
+    <a href="https://rohan5576.github.io/InterviewGo.Android/#disclaimer">Disclaimer</a>
+    <a href="https://rohan5576.github.io/InterviewGo.Android/#delete">Delete Account</a>
+    <a href="mailto:androtechupdates@gmail.com">Contact</a>
+  </div>
+  <div>© 2026 InterviewGo. All rights reserved.</div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var SUPABASE_URL = 'https://mjjkfbhkmyaehsdpfqcc.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qamtmYmhrbXlhZWhzZHBmcWNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0Njc4NDAsImV4cCI6MjA4MTA0Mzg0MH0._c_TT1Ukxv6hIAuvZY_iBTJSTIzHPfYhYMEiCIp0mFY';
+  var SITE_ROOT = 'https://rohan5576.github.io/InterviewGo.Android';
+  var PLAY_STORE = 'https://play.google.com/store/apps/details?id=in.interviewgo';
+
+  var app = document.getElementById('app');
+
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function truncate(s, n) {
+    s = String(s || '').trim();
+    return s.length > n ? s.slice(0, n).trim() + '…' : s;
+  }
+
+  function relativeTime(ts) {
+    if (!ts) return '';
+    var d = new Date(ts);
+    if (isNaN(d.getTime())) return '';
+    var diff = Math.max(0, (Date.now() - d.getTime()) / 1000);
+    if (diff < 60) return 'just now';
+    if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+    if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+    if (diff < 2592000) return Math.floor(diff / 86400) + 'd ago';
+    return Math.floor(diff / 2592000) + 'mo ago';
+  }
+
+  function api(table, select, opts) {
+    opts = opts || {};
+    var params = new URLSearchParams({ select: select });
+    (opts.filters || []).forEach(function (f) { params.append(f[0], f[1]); });
+    params.append('limit', String(opts.limit || 10));
+    return fetch(SUPABASE_URL + '/rest/v1/' + table + '?' + params.toString(), {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY
+      }
+    }).then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
+  }
+
+  function firstOf(arr) {
+    return Array.isArray(arr) && arr.length ? arr[0] : null;
+  }
+
+  function setMeta(title, description) {
+    document.title = title;
+    ['og:title', 'twitter:title'].forEach(function (k) {
+      var el = document.querySelector('meta[property="' + k + '"]');
+      if (el) el.setAttribute('content', title);
+    });
+    ['og:description', 'twitter:description'].forEach(function (k) {
+      var el = document.querySelector('meta[property="' + k + '"]');
+      if (el) el.setAttribute('content', description);
+    });
+  }
+
+  function ctas(deepLink, label) {
+    var open = deepLink
+      ? '<a class="btn btn-primary" href="' + esc(deepLink) + '">Open in InterviewGo</a>'
+      : '';
+    return '<div class="ctas">' + open +
+      '<a class="btn ' + (deepLink ? 'btn-secondary' : 'btn-primary') +
+      '" href="' + PLAY_STORE + '">Get it on Google Play</a></div>';
+  }
+
+  function renderNotFound(kind) {
+    setMeta('' + kind + ' not found · InterviewGo',
+      'This ' + kind + ' is no longer available on InterviewGo.');
+    app.innerHTML =
+      '<div class="card empty">' +
+      '<div class="big">This ' + esc(kind) + ' is no longer available</div>' +
+      '<div class="sm">It may have been removed or already closed.</div>' +
+      ctas('', false) + '</div>';
+  }
+
+  // ── Job ────────────────────────────────────────────────────────────────
+  function renderJob(id) {
+    api('jobs',
+      'id,title,company,location,experience,job_type,description,created_at',
+      { filters: [['id', 'eq.' + id], ['is_active', 'eq.true']] })
+      .then(function (rows) {
+        var j = firstOf(rows);
+        if (!j) return renderNotFound('job');
+        var typeLabels = { remote: 'Remote', hybrid: 'Hybrid', full_time: 'Full Time', freelancing: 'Freelancing' };
+        var chips = [];
+        if (j.location) chips.push('📍 ' + esc(j.location));
+        if (j.job_type) chips.push('💼 ' + esc(typeLabels[j.job_type] || j.job_type));
+        if (j.experience) chips.push('🗓 ' + esc(j.experience));
+        if (j.created_at) chips.push('🕒 ' + relativeTime(j.created_at));
+        var headline = esc(j.title) + ' at ' + esc(j.company);
+        setMeta(headline + ' · InterviewGo',
+          (j.location ? j.location + ' — ' : '') + 'View job on InterviewGo.');
+        app.innerHTML =
+          '<span class="pill">Job opening</span>' +
+          '<div class="card">' +
+          '<div class="title">' + esc(j.title) + '</div>' +
+          '<div class="subtitle">at ' + esc(j.company) + '</div>' +
+          '<div class="meta">' + chips.join('') + '</div>' +
+          (j.description ? '<div class="desc">' + esc(truncate(j.description, 320)) + '</div>' : '') +
+          '<div class="fade">See full details and apply inside the app.</div>' +
+          '</div>' +
+          ctas('interviewgo://app/job/' + encodeURIComponent(id), true);
+      });
+  }
+
+  // ── Experience ─────────────────────────────────────────────────────────
+  function renderExperience(id) {
+    Promise.all([
+      api('experiences',
+        'id,company_name,role,location,result,difficulty,overall_notes,created_at',
+        { filters: [['id', 'eq.' + id]] }),
+      api('interview_rounds', 'id', { filters: [['experience_id', 'eq.' + id]], limit: 1 })
+    ]).then(function (res) {
+      var e = firstOf(res[0]);
+      if (!e) return renderNotFound('experience');
+      var chips = [];
+      if (e.location) chips.push('📍 ' + esc(e.location));
+      if (e.company_name && e.role) chips.push('🎯 ' + esc(e.role));
+      if (e.result) chips.push('✅ ' + esc(e.result));
+      if (e.difficulty) chips.push('⭐ Difficulty ' + esc(e.difficulty) + '/5');
+      if (e.created_at) chips.push('🕒 ' + relativeTime(e.created_at));
+      var headline = (e.role ? e.role + ' at ' : '') + e.company_name;
+      setMeta(headline + ' · InterviewGo',
+        (e.result ? e.result + ' — ' : '') + 'Read this interview experience on InterviewGo.');
+      app.innerHTML =
+        '<span class="pill">Interview experience</span>' +
+        '<div class="card">' +
+        '<div class="title">' + esc(headline) + '</div>' +
+        '<div class="meta">' + chips.join('') + '</div>' +
+        (e.overall_notes ? '<div class="desc">' + esc(truncate(e.overall_notes, 260)) + '</div>' : '') +
+        '<div class="fade">' + (Array.isArray(res[1]) ? res[1].length : 0) +
+        ' round' + ((Array.isArray(res[1]) && res[1].length === 1) ? '' : 's') +
+        ' shared · see all rounds inside the app.</div>' +
+        '</div>' +
+        ctas('interviewgo://app/experience-detail/' + encodeURIComponent(id), true);
+    });
+  }
+
+  // ── Question ───────────────────────────────────────────────────────────
+  function renderQuestion(id) {
+    api('questions',
+      'id,text,answer,tags,difficulty,upvotes,categories(name),created_at',
+      { filters: [['id', 'eq.' + id]] })
+      .then(function (rows) {
+        var q = firstOf(rows);
+        if (!q) return renderNotFound('question');
+        var cat = q.categories && q.categories.name ? q.categories.name : null;
+        var chips = [];
+        if (cat) chips.push('🏷 ' + esc(cat));
+        if (q.difficulty) chips.push('📊 ' + esc(q.difficulty));
+        if (typeof q.upvotes === 'number') chips.push('👍 ' + q.upvotes);
+        var title = truncate(q.text, 90);
+        setMeta('"'+title+'" · InterviewGo',
+          'Practice this interview question · ' + (cat || 'InterviewGo'));
+        app.innerHTML =
+          '<span class="pill">Interview question</span>' +
+          '<div class="card">' +
+          '<div class="title">' + esc(q.text) + '</div>' +
+          '<div class="meta">' + chips.join('') + '</div>' +
+          (q.answer ? '<div class="desc">' + esc(truncate(q.answer, 300)) + '</div>' : '') +
+          '<div class="fade">Open the app for the full answer and related questions.</div>' +
+          '</div>' +
+          ctas('interviewgo://app/question/' + encodeURIComponent(id), true);
+      });
+  }
+
+  // ── User profile ───────────────────────────────────────────────────────
+  function renderUser(username) {
+    api('profiles',
+      'id,display_name,username,avatar_url,company_name,designation',
+      { filters: [['username', 'ilike.' + username]] })
+      .then(function (rows) {
+        var p = firstOf(rows);
+        if (!p) return renderNotFound('profile');
+        var meta = [];
+        if (p.company_name) meta.push('🏢 ' + esc(p.company_name));
+        if (p.designation) meta.push('💼 ' + esc(p.designation));
+        var display = p.display_name || '@' + p.username;
+        setMeta(display + ' · InterviewGo',
+          (p.designation ? p.designation + ' · ' : '') + 'View profile on InterviewGo.');
+        app.innerHTML =
+          '<span class="pill">Profile</span>' +
+          '<div class="card">' +
+          '<div class="title">' + esc(display) + '</div>' +
+          '<div class="subtitle">@' + esc(p.username) + '</div>' +
+          '<div class="meta">' + meta.join('') + '</div>' +
+          '<div class="fade">See this user\u2019s shared interview experiences inside the app.</div>' +
+          '</div>' +
+          ctas('interviewgo://app/user/' + encodeURIComponent(username), true);
+      });
+  }
+
+  // ── Company ────────────────────────────────────────────────────────────
+  function renderCompany(name, companyId) {
+    var filter = companyId
+      ? ['id', 'eq.' + companyId]
+      : ['name', 'eq.' + name];
+    Promise.all([
+      api('companies', 'name,logo_url,description,experience_count,overall_rating',
+        { filters: [filter] }),
+      api('experiences', 'id,company_name,role,created_at',
+        { filters: [['company_name', 'eq.' + name]], limit: 3 })
+    ]).then(function (res) {
+      var c = firstOf(res[0]);
+      if (!c) return renderNotFound('company');
+      var rating = c.overall_rating ? '⭐ ' + c.overall_rating + ' rating' : null;
+      var count = c.experience_count ? c.experience_count + ' experiences' : null;
+      var chips = [];
+      if (rating) chips.push(rating);
+      if (count) chips.push('📄 ' + esc(count));
+      var list = '';
+      if (Array.isArray(res[1]) && res[1].length) {
+        list = res[1].map(function (x) {
+          return '<div style="padding:8px 0;border-top:1px solid rgba(148,163,184,0.1)">' +
+            '<div style="font-size:14px;font-weight:600;color:#E2E8F0">' + esc(x.role) +
+            ' <span style="color:#64748B;font-weight:400">at ' + esc(x.company_name) + '</span></div>' +
+            '<div style="font-size:12px;color:#64748B">' + relativeTime(x.created_at) + '</div></div>';
+        }).join('');
+      }
+      setMeta(c.name + ' · InterviewGo',
+        (c.overall_rating ? c.overall_rating + ' star rating · ' : '') +
+        (c.experience_count ? c.experience_count + ' experiences · ' : '') + 'InterviewGo');
+      app.innerHTML =
+        '<span class="pill">Company</span>' +
+        '<div class="card">' +
+        '<div class="title">' + esc(c.name) + '</div>' +
+        '<div class="meta">' + chips.join('') + '</div>' +
+        (c.description ? '<div class="desc">' + esc(truncate(c.description, 220)) + '</div>' : '') +
+        (list ? '<div style="margin-top:8px">' + list + '</div>' : '') +
+        '</div>' +
+        ctas('interviewgo://app/companies-screen?company=' + encodeURIComponent(name) +
+          (companyId ? '&companyId=' + encodeURIComponent(companyId) : ''), true);
+    });
+  }
+
+  // ── Root / generic ─────────────────────────────────────────────────────
+  function renderHome() {
+    setMeta('InterviewGo — Ace Android & Product Interviews',
+      'Read real interview experiences, practice curated questions, and discover jobs.');
+    app.innerHTML =
+      '<div class="hero">' +
+      '<h1>Ace your Android &amp; product interviews</h1>' +
+      '<p>Real experiences from real candidates. Curated practice questions. Fresh job openings.</p>' +
+      '</div>' +
+      '<div class="features">' +
+      '<div class="feat"><div class="ic">💬</div><div class="lb">Interview Q&amp;A</div>' +
+      '<div class="ds">Practice curated questions with answers</div></div>' +
+      '<div class="feat"><div class="ic">🎤</div><div class="lb">Real Experiences</div>' +
+      '<div class="ds">Round-by-round interview journeys</div></div>' +
+      '<div class="feat"><div class="ic">💼</div><div class="lb">Jobs</div>' +
+      '<div class="ds">Fresh openings at top product companies</div></div>' +
+      '</div>' +
+      ctas('interviewgo://app', true);
+  }
+
+  // ── Entry point ────────────────────────────────────────────────────────
+  function boot() {
+    var raw = location.pathname || '';
+    var parts = raw.split('/').filter(Boolean);
+    // Peel the GitHub Pages repo prefix if present.
+    if (parts.length && parts[0] === 'InterviewGo.Android') parts.shift();
+    if (parts.length && parts[0] === 'InterviewGo.Android') parts.shift(); // nesting safety
+
+    if (!parts.length) return renderHome(); // raw page root -> brand landing
+
+    var type = parts[0].toLowerCase();
+    var id = parts.slice(1).map(decodeURIComponent).join('/');
+    var params = new URLSearchParams(location.search);
+
+    if (type === 'job' && id) return renderJob(id);
+    if (type === 'experience-detail' && id) return renderExperience(id);
+    if (type === 'question' && id) return renderQuestion(id);
+    if (type === 'user' && id) return renderUser(id);
+    if (type === 'companies-screen') {
+      var company = params.get('company');
+      var companyId = params.get('companyId');
+      if (company) return renderCompany(company, companyId);
+      return renderHome();
+    }
+    if (type === '') return renderHome();
+
+    return renderNotFound('page');
+  }
+
+  boot();
+})();
+</script>
+</body>
+</html>
