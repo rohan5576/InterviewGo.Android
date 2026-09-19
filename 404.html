@@ -129,7 +129,7 @@
 
   var SUPABASE_URL = 'https://mjjkfbhkmyaehsdpfqcc.supabase.co';
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qamtmYmhrbXlhZWhzZHBmcWNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0Njc4NDAsImV4cCI6MjA4MTA0Mzg0MH0._c_TT1Ukxv6hIAuvZY_iBTJSTIzHPfYhYMEiCIp0mFY';
-  var SITE_ROOT = 'https://rohan5576.github.io/InterviewGo.Android';
+  var SITE_ROOT = 'https://interviewgo.in';
   var PLAY_STORE = 'https://play.google.com/store/apps/details?id=in.interviewgo';
 
   var app = document.getElementById('app');
@@ -401,10 +401,11 @@
   }
 
   // ── Short links ────────────────────────────────────────────────────────
-  // interviewgo.in/go/<code> → look up the stored path and bounce to it in the
-  // same origin. If the app is installed, Android App Links intercepts the
-  // resulting https://interviewgo.in/login path and opens the app directly;
-  // otherwise the page re-resolves that path and renders the normal preview.
+  // github.io//go/<code> → look up the stored path and bounce to the real
+  // route. The stored path is host-relative (no repo prefix), so the prefix is
+  // rebuilt from where this page is actually served (e.g. /InterviewGo.Android
+  // on GitHub Pages, or nothing on a custom domain) — same origin, then the
+  // normal preview/render logic takes over.
   function renderShortLink(code) {
     api('short_links', 'code,path', { filters: [['code', 'eq.' + code]] })
       .then(function (rows) {
@@ -421,7 +422,20 @@
             body: JSON.stringify({ p_code: code })
           });
         } catch (_) {}
-        window.location.replace(location.origin + row.path);
+        var parts = (location.pathname || '').split('/').filter(Boolean);
+        var prefix = parts.length && parts[0] !== 'go' ? '/' + parts[0] : '';
+        var target = row.path;
+        if (target.indexOf('/') !== 0) target = '/' + target;
+        // Drop a stale GitHub Pages repo prefix baked into old stored paths
+        // (e.g. /InterviewGo.Android/job/...), it no longer exists on the
+        // live canonical domain.
+        if (target.indexOf('/InterviewGo.Android/', 0) === 0) {
+          target = target.slice('/InterviewGo.Android'.length);
+        }
+        if (prefix && target.indexOf(prefix) === 0) {
+          target = target.slice(prefix.length);
+        }
+        window.location.replace(location.origin + prefix + target);
       })
       .catch(function () { return renderNotFound('link'); });
   }
