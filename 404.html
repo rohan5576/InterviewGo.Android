@@ -448,6 +448,17 @@
     if (parts.length && parts[0] === 'InterviewGo.Android') parts.shift();
     if (parts.length && parts[0] === 'InterviewGo.Android') parts.shift(); // nesting safety
 
+    // App builds released before the interviewgo.in domain went live still
+    // share rohan5576.github.io/InterviewGo.Android/... links. Bounce every
+    // such link to the canonical domain so recipients land on the live
+    // Netlify page (interviewgo.in/go/<code> and the route previews resolve
+    // there). interviewgo.in never matches this branch, so no loop.
+    if (location.hostname === 'rohan5576.github.io') {
+      window.location.replace(SITE_ROOT + '/' + parts.join('/') +
+        location.search + location.hash);
+      return;
+    }
+
     if (!parts.length) return renderHome(); // raw page root -> brand landing
 
     var type = parts[0].toLowerCase();
