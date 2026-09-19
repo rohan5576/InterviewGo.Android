@@ -400,6 +400,32 @@
       ctas('interviewgo://app', true);
   }
 
+  // ── Short links ────────────────────────────────────────────────────────
+  // interviewgo.in/go/<code> → look up the stored path and bounce to it in the
+  // same origin. If the app is installed, Android App Links intercepts the
+  // resulting https://interviewgo.in/login path and opens the app directly;
+  // otherwise the page re-resolves that path and renders the normal preview.
+  function renderShortLink(code) {
+    api('short_links', 'code,path', { filters: [['code', 'eq.' + code]] })
+      .then(function (rows) {
+        var row = firstOf(rows);
+        if (!row || !row.path) return renderNotFound('link');
+        try {
+          fetch(SUPABASE_URL + '/rest/v1/rpc/increment_short_link_clicks', {
+            method: 'POST',
+            headers: {
+              'apikey': SUPABASE_KEY,
+              'Authorization': 'Bearer ' + SUPABASE_KEY,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ p_code: code })
+          });
+        } catch (_) {}
+        window.location.replace(location.origin + row.path);
+      })
+      .catch(function () { return renderNotFound('link'); });
+  }
+
   // ── Entry point ────────────────────────────────────────────────────────
   function boot() {
     var raw = location.pathname || '';
@@ -414,6 +440,7 @@
     var id = parts.slice(1).map(decodeURIComponent).join('/');
     var params = new URLSearchParams(location.search);
 
+    if (type === 'go' && id) return renderShortLink(id);
     if (type === 'job' && id) return renderJob(id);
     if (type === 'experience-detail' && id) return renderExperience(id);
     if (type === 'question' && id) return renderQuestion(id);
