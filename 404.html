@@ -187,7 +187,21 @@
     });
   }
 
+  // Best-effort auto-open. When App Links / Universal Links aren't verified on
+  // the device (e.g. iOS without associated domains, or older Android), try to
+  // jump straight into the installed app via the custom scheme. If no app is
+  // installed the browser silently ignores it and the buttons below remain —
+  // desktop is skipped entirely.
+  function autoOpen(deepLink) {
+    var isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+    if (!deepLink || !isTouch) return;
+    setTimeout(function () {
+      try { window.location = deepLink; } catch (_) {}
+    }, 250);
+  }
+
   function ctas(deepLink, label) {
+    autoOpen(deepLink);
     var open = deepLink
       ? '<a class="btn btn-primary" href="' + esc(deepLink) + '">Open in InterviewGo</a>'
       : '';
